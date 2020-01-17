@@ -1,46 +1,52 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import StarshipListListItem from "../starship-list-item";
 import { StarshipService } from "../../services/starship-service";
 import Spinner from "../spinner";
 import "./starship-list.css";
+import {
+  starshipsLoaded,
+  starshipsRequested,
+  starshipAddedToCart
+} from "../../actions";
+
 
 class StarshipList extends Component {
-    starshipService = new StarshipService();
+  starshipService = new StarshipService();
 
-    constructor() {
-        super();
-        this.loadStarships();
+  async componentDidMount() {
+    const { starshipsLoaded, starshipsRequested } = this.props;
+    starshipsRequested();
+    this.starshipService.getAllStarships().then(starships => {
+      starshipsLoaded(starships);
+    });
+  }
+
+  render() {
+    const { starships, loading, starshipAddedToCart } = this.props;
+    
+    if (loading) {
+      return <Spinner />;
     }
 
-    state = {
-        starship: []
-    };
-
-    loadStarships() {
-        this.starshipService.getAllStarships().then(starship => {
-        this.setState({
-            starship: starship
-        });
-        });
-    }
-
-    render() {
-        const { starship } = this.state;
-        return starship.length > 0 ? (
-        <ul>
-            {starship.map(starship => {
+    return (
+      <div className="container container-margin">
+        <div className="row">
+          {starships.map(starship => {
             return (
-                <li key={starship.id}>
-                <StarshipListListItem starship={starship} />
-                </li>
+              <StarshipListListItem key={starship.id} starship={starship} starshipAddedToCart={ ()=> starshipAddedToCart(starship.id)} />
             );
-            })}
-        </ul>
-        ) : (
-        <Spinner />
-        );
-    }
+          })}
+        </div>
+      </div>
+    );
+  }
 }
 
-export default StarshipList;
+const mapStateToProps = ( { starshipReducer : { starships, loading } } ) => ({ starships, loading});
+
+
+const mapDispatchToProps = { starshipsLoaded, starshipsRequested, starshipAddedToCart };
+
+export default connect(mapStateToProps, mapDispatchToProps)(StarshipList);
