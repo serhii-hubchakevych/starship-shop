@@ -5,20 +5,22 @@ class OrderService {
         const orderTotal = JSON.parse(localStorage.getItem('orderTotal'))
         if( orderTotal < 1 ){
             return new Promise(( reject ) => {
-              reject(new Error("CART IS EMPTY")) 
+                reject(new Error("CART IS EMPTY")) 
               });
         }
-        let order = [[], [], []];
+        const order = {
+            orderItems:[],
+            orderTotal: orderTotal,
+            orderDetails: userOrderInfo
+        };
         cartItems.map(item=>{
-            let itemOrderArray = {
+            const itemOrderArray = {
                 name: item.name, 
                 count: item.count,
                 price: item.costInCredits
             };
-            order[0].push(itemOrderArray)
+            order.orderItems.push(itemOrderArray)
         })
-        order[1].push(orderTotal);
-        order[2].push(userOrderInfo)
         alert(JSON.stringify(order))
 
         // --- ORDER SEND TO SERVER ---- //

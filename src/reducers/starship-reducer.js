@@ -1,4 +1,3 @@
-
 const initState = {
   starships: [],
   loading: true,

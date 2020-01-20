@@ -6,3 +6,5 @@ const ErrorIndicator = () => {
 };
 
 export default ErrorIndicator;
+
+// On future release :)

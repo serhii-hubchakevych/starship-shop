@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+
 import "./cart-form.css";
 import { OrderService } from "../../services/order-service";
 
@@ -7,23 +8,6 @@ const orderService = new OrderService();
 
 const Form = props => {
   const { handleSubmit, orderCreated } = props;
-
-  const renderField = ({
-    input,
-    placeholder,
-    type,
-    meta: { touched, error }
-  }) => (
-    <React.Fragment>
-      <input
-        {...input}
-        placeholder={placeholder}
-        type={type}
-        className="form-control"
-      />
-      {touched && error && <span style={{ color: "red" }}>{error}</span>}
-    </React.Fragment>
-  );
 
   return (
     <form
@@ -39,7 +23,7 @@ const Form = props => {
           name="firstname"
           type="text"
           component={renderField}
-          placeholder="NAME"
+          label="NAME"
         />
       </div>
       <div className="form-group">
@@ -47,7 +31,7 @@ const Form = props => {
           name="lastname"
           type="text"
           component={renderField}
-          placeholder="SURNAME"
+          label="SURNAME"
         />
       </div>
       <div className="form-group">
@@ -55,15 +39,15 @@ const Form = props => {
           name="address"
           type="text"
           component={renderField}
-          placeholder="ADDRESS"
+          label="ADDRESS"
         />
       </div>
       <div className="form-group">
         <Field
           name="phone"
-          type="text"
+          type="tel"
           component={renderField}
-          placeholder="PHONE"
+          label="PHONE"
         />
       </div>
       <button type="submit" className="btn btn-primary width-btn">
@@ -72,6 +56,25 @@ const Form = props => {
     </form>
   );
 };
+
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  
+  <React.Fragment>
+    <input
+      {...input}
+      placeholder={label}
+      type={type}
+      className="form-control"
+    />
+    {touched && error && <span style={{ color: "red" }}>{error}</span>}
+  </React.Fragment>
+);
+
 
 const validate = values => {
   const errors = {};
@@ -93,6 +96,6 @@ const validate = values => {
 };
 
 export default reduxForm({
-  form: "simple",
+  form: "orderForm",
   validate
 })(Form);

@@ -17,7 +17,7 @@ const CartItem = ({ item, decreaseStarship, increaseStarship }) => {
             height="80"
           />
         </div>
-        <div className="text-sm-center text-md-left col-md-6">
+        <div className="text-sm-center text-md-left col-md-6 mrg-left">
           <h4 className="product-name">
             <strong>{name}</strong>
           </h4>
