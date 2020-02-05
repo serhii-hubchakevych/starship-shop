@@ -11,6 +11,7 @@
     border-bottom: 1px solid lightgray;
 }
 
+
 .cmp-name{
     color: black;
     font-family: Josefin SlabBold;
@@ -18,7 +19,7 @@
     margin-bottom: 0px;
     line-height: unset;
     font-size: 30px;
-    border-right: .17em solid red;  
+    border-right: .17em solid rgb(255, 155, 155);  
     white-space: nowrap;  
     animation:  
     typing 3.5s steps(30, end),

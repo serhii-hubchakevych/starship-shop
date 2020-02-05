@@ -1,10 +1,32 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import TextField from '@material-ui/core/TextField'; 
 
 import "./cart-form.css";
 import { OrderService } from "../../services/order-service";
 
 const orderService = new OrderService();
+
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  
+  <React.Fragment>
+    <TextField id="outlined-basic"
+      {...input}
+      error= {touched && error && true}
+      helperText= {touched && error}
+      label={label}
+      type={type}
+      className="form-control"
+      variant="outlined"
+    />
+  </React.Fragment>
+);
+
 
 const Form = props => {
   const { handleSubmit, orderCreated } = props;
@@ -50,45 +72,28 @@ const Form = props => {
           label="PHONE"
         />
       </div>
-      <button type="submit" className="btn btn-primary width-btn">
+      <button type="submit" className="btn btn-outline-danger width-btn">
         ORDER
       </button>
     </form>
   );
 };
 
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  
-  <React.Fragment>
-    <input
-      {...input}
-      placeholder={label}
-      type={type}
-      className="form-control"
-    />
-    {touched && error && <span style={{ color: "red" }}>{error}</span>}
-  </React.Fragment>
-);
 
 
 const validate = values => {
   const errors = {};
   if (!values.firstname) {
-    errors.firstname = "All fields are REQUIRED";
+    errors.firstname = "Name field is required!";
   }
   if (!values.lastname) {
-    errors.lastname = "All fields are REQUIRED";
+    errors.lastname = "Surname field is required!";
   }
   if (!values.address) {
-    errors.address = "All fields are REQUIRED";
+    errors.address = "Address field is required!";
   }
   if (!values.phone) {
-    errors.phone = "All fields are REQUIRED";
+    errors.phone = "Phone field is required";
   } else if (isNaN(Number(values.phone))) {
     errors.phone = "Phone must be a number!";
   }

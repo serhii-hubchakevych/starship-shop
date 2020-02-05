@@ -1,12 +1,28 @@
+@import "../fonts/fonts.css";
+
 .card-img-height{
     height: 200px;
+    border-bottom: 1px solid lightgray;
 }
 
 .col-pd-bt{
     padding-bottom: 20px;
 }
 
+.body-icon{
+    color: rgb(255, 155, 155) !important;
+}
+
+
+.btn:hover .body-icon{
+    color: white !important;
+}
+
 .btn-width{
     width: 100%;
     margin-top: 10px;
+}
+
+.price{
+    font-family: 'Josefin SlabBold';
 }

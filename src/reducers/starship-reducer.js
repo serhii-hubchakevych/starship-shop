@@ -6,38 +6,6 @@ const initState = {
 };
 
 
-const starshipReducer = (state = initState, action) => {
-  switch (action.type) {
-    case "STARSHIP_INCREASED":
-      return increaseStarships(state, action);
-
-    case "STARSHIP_DECREASED":
-      return decreaseStarships(state, action);
-
-    case "STARSHIP_ADDED_TO_CART":
-      return addStarshipToCart(state, action);
-
-    case "STARSHIPS_REQUESTED":
-      return starshipsRequested(state, action);
-
-    case "STARSHIPS_LOADED":
-      return starshipsLoaded(state, action);
-
-    case "ORDER_CREATED":
-      localStorage.removeItem('cartItems')
-      localStorage.removeItem('orderTotal')
-    return {
-      ...state,
-      cartItems: [],
-      orderTotal: 0
-    };
-
-    default:
-      return state;
-  }
-};
-
-
 const increaseStarships = (state, action) => {
   const indexIncreasedStarship = state.cartItems.findIndex(
     item => item.id === action.payload
@@ -152,5 +120,38 @@ const starshipsRequested = (state, action) => {
     loading: true
   };
 };
+
+
+const starshipReducer = (state = initState, action) => {
+  switch (action.type) {
+    case "STARSHIP_INCREASED":
+      return increaseStarships(state, action);
+
+    case "STARSHIP_DECREASED":
+      return decreaseStarships(state, action);
+
+    case "STARSHIP_ADDED_TO_CART":
+      return addStarshipToCart(state, action);
+
+    case "STARSHIPS_REQUESTED":
+      return starshipsRequested(state, action);
+
+    case "STARSHIPS_LOADED":
+      return starshipsLoaded(state, action);
+
+    case "ORDER_CREATED":
+      localStorage.removeItem('cartItems')
+      localStorage.removeItem('orderTotal')
+    return {
+      ...state,
+      cartItems: [],
+      orderTotal: 0
+    };
+
+    default:
+      return state;
+  }
+};
+
 
 export default starshipReducer;

@@ -11,6 +11,7 @@ class Header extends Component {
     const { orderTotal } = this.props;
     return (
       <div className="navbar navbar-light bg-light">
+        <div className="container">
         <Link to="/">
           <h1 className="cmp-name">STARSHIPS STORE</h1>
         </Link>
@@ -25,6 +26,7 @@ class Header extends Component {
         <Link to="/cart">
           <FontAwesomeIcon icon={faShoppingCart} className="cart-icon" /><span className="cart-desc">CART</span>
         </Link>
+        </div>
       </div>
     );
   }
