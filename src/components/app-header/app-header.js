@@ -10,7 +10,7 @@ class Header extends Component {
     return (
       <div className="navbar navbar-light bg-light">
         <Link to="/">
-          <span>STARSHIPS STORE</span>
+          <span className="cmp-name">STARSHIPS STORE</span>
         </Link>
         {
           orderTotal > 0 ?

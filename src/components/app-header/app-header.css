@@ -1,5 +1,14 @@
 
+@import "../fonts/fonts.css";
+
 .mrg-right{
     margin-left: auto;
     margin-right: 10px;
+}
+
+
+.cmp-name{
+    font-family: 'Josefin SlabBold';
+    color: black;
+    font-size: 30px;
 }
